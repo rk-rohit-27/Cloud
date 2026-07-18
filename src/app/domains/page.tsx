@@ -6,7 +6,7 @@ import CTASection from "@/components/public/CTASection";
 import DomainSearch from "@/components/public/DomainSearch";
 
 export const metadata: Metadata = {
-  title: "Domain Names — Find & Register Yours | ZypherHost",
+  title: "Domain Names — Find & Register Yours | NexaSkyCloud",
   description:
     "Search and register domain names with free WHOIS privacy, free DNS management, and instant activation. .com from $10.99/yr.",
 };
@@ -64,7 +64,7 @@ const TLD_PRICES: TldPrice[] = [
 
 const FAQS = [
   {
-    question: "How do I transfer a domain to ZypherHost?",
+    question: "How do I transfer a domain to NexaSkyCloud?",
     answer:
       "Initiate a transfer from your dashboard by entering your domain and unlocking it at your current registrar. We'll send the authorization code via email, and the transfer typically completes within 5–7 days. Most transfers include a free 1-year renewal.",
   },

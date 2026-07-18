@@ -84,7 +84,7 @@ export default function DashboardTopbar({ onToggleSidebar }: Props) {
             <div className="grid h-7 w-7 place-items-center rounded-md bg-neon/15 text-neon">
               <span className="text-sm font-bold">Z</span>
             </div>
-            <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">Zypher<span className="gradient-text-sm">Host</span></span>
+            <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">NexaSky<span className="gradient-text-sm">Cloud</span></span>
           </Link>
 
           

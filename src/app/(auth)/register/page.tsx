@@ -188,7 +188,7 @@ export default function RegisterPage() {
           Create Account
         </h1>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Get started with ZypherHost today
+          Get started with NexaSkyCloud today
         </p>
       </div>
 

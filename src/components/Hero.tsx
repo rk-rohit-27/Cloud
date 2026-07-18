@@ -30,9 +30,9 @@ export default function Hero() {
           className="font-(family-name:--font-space-grotesk) text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
         >
           Next-Gen{" "}
-          <span className="gradient-text">Game Server</span>
+          <span className="gradient-text">Web &amp; Cloud</span>
           <br className="hidden xs:block sm:block" />
-          &amp; VPS Hosting
+          Hosting
         </motion.h1>
 
         {/* Subtitle */}
@@ -42,7 +42,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-[var(--text-secondary)]"
         >
-          Deploy your Minecraft, FiveM, or Rust server in seconds. Enterprise-grade
+          Deploy your Website, Store, or Application in seconds. Enterprise-grade
           DDoS protection, 99.9% uptime, and 24/7 expert support — all at prices
           that won&apos;t break the bank.
         </motion.p>
@@ -71,7 +71,7 @@ export default function Hero() {
         >
           <div>
             <span className="block text-xl sm:text-2xl font-bold text-[var(--text-primary)]">15K+</span>
-            Active Servers
+            Hosted Websites
           </div>
           <div className="hidden sm:block h-8 w-px bg-[var(--glass-border)]" />
           <div>

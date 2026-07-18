@@ -25,7 +25,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-neon transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]" />
           <span className="font-(family-name:--font-space-grotesk) text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)]">
-            Zypher<span className="gradient-text-sm">Host</span>
+            NexaSky<span className="gradient-text-sm">Cloud</span>
           </span>
         </Link>
 

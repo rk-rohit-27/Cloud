@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getMongoDb } from "@/lib/mongodb";
 import { createVerificationToken } from "@/lib/verification";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, generateEmailHtml } from "@/lib/email";
 
 export const runtime = "nodejs"; // force Node runtime — mongodb needs Node built-ins
 
@@ -68,25 +68,17 @@ export async function POST(req: Request) {
     try {
       await sendEmail({
         to: email,
-        subject: "Verify your email — ZypherHost",
-        html: `
-          <div style="font-family:system-ui,sans-serif;max-width:480px;margin:0 auto;padding:32px 16px;background:#0a0a0a;border-radius:12px;">
-            <div style="text-align:center;margin-bottom:24px;">
-              <h1 style="font-size:24px;font-weight:700;color:#00f0ff;margin:0;">ZypherHost</h1>
-            </div>
-            <h2 style="color:#e4e4e7;font-size:18px;margin:0 0 8px;">Welcome aboard, ${name}!</h2>
-            <p style="color:#a1a1aa;font-size:14px;line-height:1.6;margin:0 0 24px;">
-              Please verify your email address to activate your account. This link expires in 24 hours.
-            </p>
-            <a href="${verifyUrl}"
-               style="display:inline-block;background:linear-gradient(135deg,#00f0ff,#0080ff);color:#0a0a0a;font-weight:600;font-size:14px;padding:12px 32px;border-radius:8px;text-decoration:none;">
-              Verify Email Address
-            </a>
-            <p style="color:#71717a;font-size:12px;line-height:1.6;margin:24px 0 0;">
-              If you didn't create an account, you can safely ignore this email.
-            </p>
-          </div>
-        `,
+        subject: "Verify your email — NexaSkyCloud",
+        html: generateEmailHtml(
+          "Verify your email — NexaSkyCloud",
+          `
+            <h2 style="margin: 0 0 16px 0; font-size: 20px; font-weight: 600; color: #18181b;">Welcome aboard, ${name}!</h2>
+            <p style="margin: 0 0 16px 0;">Thank you for creating an account with NexaSkyCloud. Please verify your email address to activate your account.</p>
+            <p style="margin: 0;">This verification link will expire in 24 hours. If you did not create an account, you can safely ignore this email.</p>
+          `,
+          verifyUrl,
+          "Verify Email Address"
+        ),
       });
     } catch (emailErr) {
       console.error("Failed to send verification email:", emailErr);

@@ -14,7 +14,7 @@ interface CTASectionProps {
 
 export default function CTASection({
   title = "Ready to get started?",
-  subtitle = "Join thousands of customers who trust ZypherHost with their websites and applications. Deploy in minutes.",
+  subtitle = "Join thousands of customers who trust NexaSkyCloud with their websites and applications. Deploy in minutes.",
   primaryCta = "Get Started",
   primaryHref = "/register",
   secondaryCta,

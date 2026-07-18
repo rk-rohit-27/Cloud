@@ -7,7 +7,7 @@ import FAQ from "@/components/public/FAQ";
 import CTASection from "@/components/public/CTASection";
 
 export const metadata: Metadata = {
-  title: "PHP Hosting — Optimized for Speed & Compatibility | ZypherHost",
+  title: "PHP Hosting — Optimized for Speed & Compatibility | NexaSkyCloud",
   description:
     "PHP hosting with selectable PHP 5.6–8.3, MariaDB, Composer, SSH access, and LiteSpeed Cache. Built for developers.",
 };

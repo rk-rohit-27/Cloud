@@ -26,7 +26,7 @@ export default function AuthCard({ children }: AuthCardProps) {
         <Link href="/" className="mb-6 sm:mb-8 flex items-center justify-center gap-2">
           <Zap className="h-6 w-6 text-neon" />
           <span className="font-(family-name:--font-space-grotesk) text-xl font-bold text-[var(--text-primary)]">
-            Zypher<span className="gradient-text-sm">Host</span>
+            NexaSky<span className="gradient-text-sm">Cloud</span>
           </span>
         </Link>
 

@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "ZypherHost — Next-Gen Game & VPS Hosting",
+  title: "NexaSkyCloud — Next-Gen Game & VPS Hosting",
   description:
     "Blazing-fast game servers & VPS hosting with DDoS protection, NVMe SSDs, and instant deployment. Minecraft, FiveM, Rust & more.",
 };

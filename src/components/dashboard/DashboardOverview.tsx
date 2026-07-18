@@ -36,7 +36,7 @@ interface Props {
 
 const RECENT_ACTIVITY = [
   { icon: LogIn, title: "Signed in from Chrome on Windows", time: "5 min ago", color: "text-blue-400", bgColor: "bg-blue-500/10" },
-  { icon: Server, title: "Minecraft SMP started on New York", time: "1 hour ago", color: "text-green-400", bgColor: "bg-green-500/10" },
+  { icon: Server, title: "Web server started on New York", time: "1 hour ago", color: "text-green-400", bgColor: "bg-green-500/10" },
   { icon: CreditCard, title: "Invoice #2048 generated — $17.98", time: "3 hours ago", color: "text-neon-purple", bgColor: "bg-purple-500/10" },
   { icon: Settings2, title: "Dev VPS RAM upgraded to 2 GB", time: "5 hours ago", color: "text-yellow-400", bgColor: "bg-yellow-500/10" },
   { icon: Wrench, title: "Display name changed", time: "Yesterday", color: "text-neon-blue", bgColor: "bg-blue-500/10" },
@@ -59,7 +59,7 @@ export default function DashboardOverview({ userName, services }: Props) {
             Welcome back, {firstName}
           </h1>
           <p className="mt-1 text-sm text-[var(--text-secondary)] truncate">
-            Here&apos;s what&apos;s happening across your ZypherHost account today.
+            Here&apos;s what&apos;s happening across your NexaSkyCloud account today.
           </p>
         </div>
         <div className="flex flex-row gap-2 w-full sm:w-auto shrink-0">
@@ -81,7 +81,7 @@ export default function DashboardOverview({ userName, services }: Props) {
             Launch something new
           </h2>
           <p className="mt-1 text-sm text-[var(--text-secondary)]">
-            Spin up a gaming node, custom VPS, or website in under 60 seconds.
+            Spin up a website, cloud server, or custom VPS in under 60 seconds.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link

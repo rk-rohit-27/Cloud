@@ -15,25 +15,25 @@ const FEATURES = [
     icon: Shield,
     title: "DDoS Protection",
     description:
-      "Enterprise-grade, always-on DDoS mitigation up to 1 Tbps keeps your servers online no matter what.",
+      "Enterprise-grade, always-on DDoS mitigation up to 1 Tbps keeps your websites online no matter what.",
   },
   {
     icon: HardDrive,
     title: "NVMe SSD Storage",
     description:
-      "Lightning-fast NVMe drives for near-instant world loading, reduced lag, and blazing I/O performance.",
+      "Lightning-fast NVMe drives for near-instant page loading, reduced latency, and blazing I/O performance.",
   },
   {
     icon: Zap,
     title: "Instant Deployment",
     description:
-      "Your server is ready in under 60 seconds. No waiting — just select your plan and start playing.",
+      "Your hosting is ready in under 60 seconds. No waiting — just select your plan and start building.",
   },
   {
     icon: Globe,
     title: "Global Network",
     description:
-      "10+ data centers worldwide. Pick the location closest to your players for the lowest ping.",
+      "10+ data centers worldwide. Pick the location closest to your visitors for the lowest latency.",
   },
   {
     icon: Headphones,

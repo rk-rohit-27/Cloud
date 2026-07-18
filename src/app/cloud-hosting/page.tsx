@@ -7,7 +7,7 @@ import FAQ from "@/components/public/FAQ";
 import CTASection from "@/components/public/CTASection";
 
 export const metadata: Metadata = {
-  title: "Cloud Hosting — Dedicated Resources That Scale | ZypherHost",
+  title: "Cloud Hosting — Dedicated Resources That Scale | NexaSkyCloud",
   description:
     "Cloud hosting with dedicated RAM and CPU, isolated environments, instant scaling, and auto-failover. NVMe storage included.",
 };
@@ -167,7 +167,7 @@ export default function CloudHostingPage() {
               Cloud Hosting with <span className="gradient-text">dedicated resources</span> that scale
             </>
           }
-          subtitle="Isolated environments, dedicated CPU and RAM, and instant scaling on NVMe infrastructure. Built for apps that can't afford to share."
+          subtitle="Best for: High-traffic websites, growing online stores, and large-scale projects requiring high uptime. How it works: Combines the simple management of shared hosting with dedicated virtual server resources. It isolates your site so traffic spikes on other sites won't hurt your performance. Key Features: Up to 20x more speed and power compared to standard shared plans, dedicated IP addresses on higher tiers, and a global CDN."
         />
 
         <FeatureGrid

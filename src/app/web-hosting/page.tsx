@@ -7,7 +7,7 @@ import FAQ from "@/components/public/FAQ";
 import CTASection from "@/components/public/CTASection";
 
 export const metadata: Metadata = {
-  title: "Web Hosting — Fast, Secure & Effortless | ZypherHost",
+  title: "Web Hosting — Fast, Secure & Effortless | NexaSkyCloud",
   description:
     "Reliable web hosting with LiteSpeed servers, free SSL, daily backups, and 1-click WordPress. 99.9% uptime and 24/7 support.",
 };
@@ -167,7 +167,7 @@ export default function WebHostingPage() {
               Web Hosting that&apos;s <span className="gradient-text">fast, secure</span>, and effortless
             </>
           }
-          subtitle="LiteSpeed-powered hosting with free SSL, daily backups, and 1-click WordPress. Deploy your site in minutes and scale with confidence."
+          subtitle="Best for: Small businesses, personal projects, blogs, and beginners. How it works: Multiple websites share a single server's resources, making it highly cost-effective. Key Features: Built-in AI website builder, Node.js support, automated weekly or daily backups, and a custom, user-friendly control panel (hPanel)."
         />
 
         <FeatureGrid

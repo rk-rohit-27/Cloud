@@ -15,7 +15,7 @@ export default function DashboardFooter() {
         <div className="flex items-center gap-4">
           <span>Build 2026.07</span>
           <span className="hidden sm:inline">&middot;</span>
-          <span>&copy; {year} ZypherHost</span>
+          <span>&copy; {year} NexaSkyCloud</span>
         </div>
       </div>
     </footer>

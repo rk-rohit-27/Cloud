@@ -94,7 +94,7 @@ function LoginForm() {
           Welcome Back
         </h1>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Sign in to your ZypherHost account
+          Sign in to your NexaSkyCloud account
         </p>
       </div>
 

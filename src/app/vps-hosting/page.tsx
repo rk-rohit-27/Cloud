@@ -7,7 +7,7 @@ import FAQ from "@/components/public/FAQ";
 import CTASection from "@/components/public/CTASection";
 
 export const metadata: Metadata = {
-  title: "VPS Hosting — Full Root Control & NVMe Speed | ZypherHost",
+  title: "VPS Hosting — Full Root Control & NVMe Speed | NexaSkyCloud",
   description:
     "KVM-based VPS hosting with full root access, choice of OS, IPv4+IPv6, and NVMe SSDs. Deploy in under 60 seconds.",
 };
@@ -168,7 +168,7 @@ export default function VpsHostingPage() {
               VPS Hosting with <span className="gradient-text">full root control</span>
             </>
           }
-          subtitle="KVM virtualization, your choice of OS, dedicated IPv4+IPv6, and NVMe SSDs. Deploy a server you fully control in under 60 seconds."
+          subtitle="Best for: Full-stack developers, agencies, or custom applications requiring root access and isolated configurations. How it works: Provides completely dedicated, isolated virtual server resources. You get absolute control over your environment, but it requires a bit more technical server administration knowledge. Key Features: Full root access, dedicated IPv6, NVMe storage, and scalable resources."
         />
 
         <FeatureGrid

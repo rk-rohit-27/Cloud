@@ -19,7 +19,7 @@ export default function ServiceActions({ serviceId, status, isActive }: Props) {
   const [lastResult, setLastResult] = useState<{ ok: boolean; msg: string } | null>(null);
   const [showConsole, setShowConsole] = useState(false);
   const [consoleLines] = useState<string[]>([
-    "[INFO] ZypherHost console v2.1.0",
+    "[INFO] NexaSkyCloud console v2.1.0",
     "[INFO] Service id: " + serviceId,
     "[INFO] Status: " + status,
     "[INFO] Waiting for input…",

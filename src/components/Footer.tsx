@@ -46,11 +46,11 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2 group shrink-0 w-fit">
               <Zap className="h-5 w-5 text-neon transition-transform duration-300 group-hover:scale-110" />
               <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">
-                Zypher<span className="gradient-text-sm">Host</span>
+                NexaSky<span className="gradient-text-sm">Cloud</span>
               </span>
             </Link>
             <p className="max-w-xs text-xs sm:text-sm leading-relaxed text-[var(--text-muted)]">
-              Next-generation game server and VPS hosting. Deploy in seconds, play
+              Next-generation Web, Cloud and VPS hosting. Deploy in seconds, build
               without limits.
             </p>
             {/* Social Links Chips */}
@@ -92,7 +92,7 @@ export default function Footer() {
         {/* Sub-Footer Copyright Area */}
         <div className="mt-10 sm:mt-16 flex flex-col items-center justify-between gap-3 border-t border-[var(--footer-border)] pt-6 sm:pt-8 sm:flex-row">
           <p className="text-[11px] sm:text-xs text-[var(--text-muted)] text-center sm:text-left">
-            &copy; 2026 ZypherHost. All rights reserved.
+            &copy; 2026 NexaSkyCloud. All rights reserved.
           </p>
           <p className="text-[11px] sm:text-xs text-[var(--text-muted)] font-medium tracking-wide">
             Crafted with precision.

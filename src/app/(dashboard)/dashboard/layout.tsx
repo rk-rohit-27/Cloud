@@ -60,7 +60,7 @@ export default function DashboardLayout({
         <aside className="hidden lg:block lg:w-64 lg:shrink-0 border-r border-[var(--glass-border)] bg-[var(--bg-primary)] p-6 overflow-y-auto">
           <div className="mb-6 px-2">
             <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">
-              Zypher<span className="gradient-text-sm">Host</span>
+              NexaSky<span className="gradient-text-sm">Cloud</span>
             </span>
           </div>
           <SidebarNav />
@@ -93,7 +93,7 @@ export default function DashboardLayout({
                 <div className="mb-6 flex items-center justify-between px-2">
                   <span className="font-(family-name:--font-space-grotesk) text-base font-bold text-[var(--text-primary)]">
                     <Link href="/">
-                    Zypher<span className="gradient-text-sm">Host</span>
+                    NexaSky<span className="gradient-text-sm">Cloud</span>
                   </Link>
                   </span>
                   <button
