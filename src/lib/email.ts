@@ -35,13 +35,13 @@ export function generateEmailHtml(title: string, content: string, actionUrl?: st
                 <tr>
                   <td style="padding: 40px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
                     ${content}
-                    ${actionUrl && actionText ? \`
+                    ${actionUrl && actionText ? `
                     <div style="text-align: center; margin-top: 32px; margin-bottom: 16px;">
-                      <a href="\${actionUrl}" style="display: inline-block; background-color: #18181b; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 15px;">
-                        \${actionText}
+                      <a href="${actionUrl}" style="display: inline-block; background-color: #18181b; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 15px;">
+                        ${actionText}
                       </a>
                     </div>
-                    \` : ''}
+                    ` : ''}
                   </td>
                 </tr>
                 <tr>
