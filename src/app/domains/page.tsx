@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 // Fixed string names to all-lowercase key variations to match standard Lucide Client-side index mappings safely
 const FEATURES = [
   {
-    icon: "shieldCheck" as const,
+    icon: "shield" as const,
     title: "Free WHOIS Privacy",
     description:
       "Keep your personal details out of public WHOIS records. We replace your name, email, and phone with our privacy proxy — free forever, on every domain.",
@@ -26,7 +26,7 @@ const FEATURES = [
       "Full control over your DNS records — A, AAAA, CNAME, MX, TXT, SRV, and more. Manage from your dashboard with instant propagation.",
   },
   {
-    icon: "refreshCw" as const,
+    icon: "refresh" as const,
     title: "Free Domain Forwarding",
     description:
       "Redirect your domain to any URL, with or without masking. Point multiple domains at your main site — no technical setup required.",

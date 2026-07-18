@@ -39,19 +39,19 @@ const FEATURES = [
       "Every VPS includes a dedicated IPv4 address and native IPv6 connectivity at no extra cost. Add more IPs anytime from your dashboard.",
   },
   {
-    icon: "hardDrive" as const,
+    icon: "drive" as const,
     title: "NVMe SSD Storage",
     description:
       "Blazing-fast NVMe SSDs with enterprise-grade endurance and redundancy. 10x faster IOPS than traditional SSDs for instant reads and writes.",
   },
   {
-    icon: "refreshCw" as const,
+    icon: "refresh" as const,
     title: "Snapshot Backups",
     description:
       "On-demand and scheduled snapshots with one-click restore. Capture your entire VPS state and roll back to it in seconds when you need to.",
   },
   {
-    icon: "shieldCheck" as const,
+    icon: "shield" as const,
     title: "Free DDoS Protection",
     description:
       "Network-level DDoS mitigation included on every VPS. Filters attacks up to 1 Tbps before they ever reach your server.",

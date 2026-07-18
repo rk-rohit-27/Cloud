@@ -38,7 +38,7 @@ const FEATURES = [
       "Server-level LSCache with image optimization, CSS/JS minification, and lazy loading. Page-load times drop to milliseconds.",
   },
   {
-    icon: "gitBranch" as const, // Fixed to valid standard lucide lookup string mapping
+    icon: "git" as const, // Fixed to valid standard lucide lookup string mapping
     title: "Git Deployment",
     description:
       "Deploy directly from GitHub, GitLab, or Bitbucket. Push to deploy, branch previews, and rollback in a single click.",
@@ -50,7 +50,7 @@ const FEATURES = [
       "Pre-installed Composer and Node.js runtimes. Install dependencies, build assets, and run build scripts natively on the server.",
   },
   {
-    icon: "refreshCw" as const, // Fixed from 'refresh' to safe client lookup key 'refreshCw'
+    icon: "refresh" as const, 
     title: "Staging Environments",
     description:
       "Spin up a staging clone of your site to test changes safely. Push to production when ready — files, database, and all.",
