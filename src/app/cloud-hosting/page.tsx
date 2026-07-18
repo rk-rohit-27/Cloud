@@ -21,7 +21,7 @@ const FEATURES = [
       "Reserved vCPU cores that no one else can touch. Predictable, burstable performance for traffic spikes — never throttled.",
   },
   {
-    icon: "memoryStick" as const,
+    icon: "memory" as const,
     title: "Dedicated RAM",
     description:
       "Guaranteed memory allocation isolated from noisy neighbors. Your apps always get the resources you pay for, every second.",
