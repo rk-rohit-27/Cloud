@@ -48,6 +48,12 @@ function LoginForm() {
       if (result?.error) {
         let isUnverified = result.error === "EmailNotVerified";
         
+        // NextAuth obscures custom errors on the client, so we check the cookie we set in authorize
+        if (typeof document !== "undefined" && document.cookie.includes("auth_error=EmailNotVerified")) {
+          isUnverified = true;
+          document.cookie = "auth_error=; Max-Age=0; path=/"; // clear the cookie
+        }
+
         if (!isUnverified && result.url) {
           try {
             const urlObj = new URL(result.url);
