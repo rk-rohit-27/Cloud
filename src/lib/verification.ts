@@ -58,12 +58,29 @@ export async function verifyEmailToken(
   }
 
   const userId = record.identifier;
+  const { ObjectId } = await import("mongodb");
+
+  // Support both ObjectId and string type for _id
+  let queryId: any;
+  try {
+    queryId = new ObjectId(userId);
+  } catch {
+    queryId = userId;
+  }
 
   // Mark user as verified
-  await db.collection("users").updateOne(
-    { _id: userId as any },
+  const updateResult = await db.collection("users").updateOne(
+    { _id: queryId },
     { $set: { emailVerified: new Date() } },
   );
+
+  if (updateResult.matchedCount === 0) {
+    const altQueryId = typeof queryId === "string" ? new ObjectId(queryId) : queryId.toString();
+    await db.collection("users").updateOne(
+      { _id: altQueryId },
+      { $set: { emailVerified: new Date() } },
+    );
+  }
 
   // Delete the used token
   await db.collection("verification_tokens").deleteOne({ _id: record._id });

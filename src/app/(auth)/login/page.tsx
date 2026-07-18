@@ -18,9 +18,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [resending, setResending] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [resendSuccess, setResendSuccess] = useState(false);
 
   // Map error codes to user-friendly messages
   if (!formError && error) {
@@ -28,7 +26,7 @@ function LoginForm() {
       setFormError("Invalid email or password");
     } else if (error === "EmailNotVerified") {
       setFormError(
-        "Please verify your email address before signing in. Check your inbox for the verification link.",
+        "Please verify your email address before signing in. Check your inbox or go to Forgot Password to resend the verification link.",
       );
     } else {
       setFormError("Sign in failed. Please try again.");
@@ -38,7 +36,6 @@ function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
-    setResendSuccess(false);
     setLoading(true);
 
     try {
@@ -51,7 +48,7 @@ function LoginForm() {
       if (result?.error) {
         if (result.error === "EmailNotVerified") {
           setFormError(
-            "Please verify your email address before signing in. Check your inbox for the verification link.",
+            "Please verify your email address before signing in. Check your inbox or go to Forgot Password to resend the verification link.",
           );
         } else {
           setFormError("Invalid email or password");
@@ -64,44 +61,6 @@ function LoginForm() {
       setFormError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleResendVerification = async () => {
-    setResending(true);
-    setResendSuccess(false);
-    try {
-      // Sign in silently to get a token, then resend
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (result?.error === "EmailNotVerified") {
-        // The user got a session token even though they're not verified,
-        // so we can use it to call the resend endpoint.
-        // Actually, Credentials provider throws before returning, so we need
-        // a different approach — call the resend API with credentials.
-        const res = await fetch("/api/auth/resend-verification", {
-          method: "POST",
-        });
-        const data = (await res.json()) as { error?: string; message?: string };
-
-        if (res.ok) {
-          setResendSuccess(true);
-          setFormError(null);
-        } else {
-          setFormError(data.error || "Failed to resend verification email.");
-        }
-      } else {
-        // User is verified already or wrong password
-        setFormError("Please enter your correct credentials first.");
-      }
-    } catch {
-      setFormError("Something went wrong.");
-    } finally {
-      setResending(false);
     }
   };
 
@@ -155,13 +114,6 @@ function LoginForm() {
         </div>
       )}
 
-      {/* Resend Success */}
-      {resendSuccess && (
-        <div className="rounded-lg border border-green-500/20 bg-green-500/5 px-3 py-2.5 text-xs sm:text-sm text-green-400">
-          Verification email sent! Check your inbox.
-        </div>
-      )}
-
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="mt-4 sm:mt-5 flex flex-col gap-4">
         <Input
@@ -187,21 +139,13 @@ function LoginForm() {
           icon={<Lock className="h-4 w-4 text-[var(--text-muted)]" />}
         />
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-end items-center">
           <Link
             href="/forgot-password"
             className="text-xs sm:text-sm text-neon hover:underline"
           >
             Forgot password?
           </Link>
-          <button
-            type="button"
-            onClick={handleResendVerification}
-            disabled={resending || !email}
-            className="text-xs sm:text-sm text-[var(--text-muted)] hover:text-neon transition-colors disabled:opacity-50"
-          >
-            {resending ? "Sending..." : "Resend verification"}
-          </button>
         </div>
 
         <Button type="submit" loading={loading} className="mt-2">

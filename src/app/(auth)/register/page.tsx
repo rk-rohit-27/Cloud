@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Loader2,
+  ArrowLeft,
 } from "lucide-react";
 import AuthCard from "@/components/ui/AuthCard";
 import Input from "@/components/ui/Input";
@@ -26,6 +27,48 @@ export default function RegisterPage() {
   // "check email" state — shown after successful registration
   const [registered, setRegistered] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
+
+  const [resending, setResending] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
+  const [resendError, setResendError] = useState<string | null>(null);
+  const [resendSuccess, setResendSuccess] = useState(false);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [resendTimer]);
+
+  const handleResend = async () => {
+    if (resendTimer > 0 || resending) return;
+    setResending(true);
+    setResendError(null);
+    setResendSuccess(false);
+
+    try {
+      const res = await fetch("/api/auth/resend-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: registeredEmail }),
+      });
+
+      const data = (await res.json()) as { error?: string; message?: string };
+      if (!res.ok) {
+        setResendError(data.error || "Failed to resend verification email.");
+      } else {
+        setResendSuccess(true);
+        setResendTimer(60); // start 60s cooldown
+      }
+    } catch {
+      setResendError("Something went wrong. Please try again.");
+    } finally {
+      setResending(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,22 +141,40 @@ export default function RegisterPage() {
             The link expires in 24 hours. Check your spam folder if you don&apos;t see it.
           </p>
 
-          <Button
-            onClick={() => router.push("/login")}
-            className="mt-6"
-          >
-            Go to Sign In <ArrowRight className="h-4 w-4" />
-          </Button>
+          {resendSuccess && (
+            <div className="mt-4 rounded-lg border border-green-500/20 bg-green-500/5 px-3 py-2 text-xs text-green-400">
+              Verification email resent successfully!
+            </div>
+          )}
 
-          <p className="mt-4 text-xs text-[var(--text-muted)]">
-            Didn&apos;t receive the email?{" "}
-            <Link
-              href="/login"
-              className="text-neon hover:underline font-medium"
+          {resendError && (
+            <div className="mt-4 rounded-lg border border-red-500/20 bg-red-500/5 px-3 py-2 text-xs text-red-400">
+              {resendError}
+            </div>
+          )}
+
+          <div className="mt-6 flex flex-col gap-3">
+            <Button
+              onClick={handleResend}
+              disabled={resending || resendTimer > 0}
+              variant="outline"
+              className="w-full justify-center"
             >
-              Sign in to request a new one
+              {resending ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" /> Resending...
+                </>
+              ) : resendTimer > 0 ? (
+                `Resend Verification (${resendTimer}s)`
+              ) : (
+                "Resend Verification Email"
+              )}
+            </Button>
+
+            <Link href="/login" className="flex items-center justify-center gap-2 text-sm text-[var(--text-muted)] hover:text-neon transition-colors mt-2">
+              <ArrowLeft className="h-4 w-4" /> Back to Sign In
             </Link>
-          </p>
+          </div>
         </div>
       </AuthCard>
     );

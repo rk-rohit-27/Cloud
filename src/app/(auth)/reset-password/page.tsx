@@ -40,9 +40,21 @@ function ResetPasswordForm() {
     setLoading(true);
 
     try {
-      // TODO: Implement actual password reset via API route
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSuccess(true);
+      const res = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token, password }),
+      });
+
+      const data = (await res.json()) as { error?: string; message?: string };
+
+      if (!res.ok) {
+        setError(data.error || "Failed to reset password. The link may have expired.");
+      } else {
+        setSuccess(true);
+      }
     } catch {
       setError("Failed to reset password. The link may have expired.");
     } finally {

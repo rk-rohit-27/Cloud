@@ -11,6 +11,7 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [mode, setMode] = useState<"reset" | "verify">("reset");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,10 +20,26 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      // TODO: Implement actual password reset email sending via API route
-      // For now, simulate the flow
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSent(true);
+      const endpoint =
+        mode === "reset"
+          ? "/api/auth/forgot-password"
+          : "/api/auth/resend-verification";
+
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = (await res.json()) as { error?: string; message?: string };
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+      } else {
+        setSent(true);
+      }
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -38,12 +55,22 @@ export default function ForgotPasswordPage() {
             <CheckCircle className="h-7 w-7 text-neon" />
           </div>
           <h1 className="font-(family-name:--font-space-grotesk) text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-            Check Your Email
+            {mode === "reset" ? "Check Your Email" : "Verification Sent"}
           </h1>
           <p className="mt-3 text-sm text-[var(--text-secondary)]">
-            We&apos;ve sent a password reset link to{" "}
-            <span className="font-medium text-[var(--text-primary)]">{email}</span>.
-            Please check your inbox and follow the instructions.
+            {mode === "reset" ? (
+              <>
+                We&apos;ve sent a password reset link to{" "}
+                <span className="font-medium text-[var(--text-primary)]">{email}</span>.
+                Please check your inbox and follow the instructions.
+              </>
+            ) : (
+              <>
+                We&apos;ve sent a new verification link to{" "}
+                <span className="font-medium text-[var(--text-primary)]">{email}</span>.
+                Please check your inbox and follow the link to verify your email.
+              </>
+            )}
           </p>
           <p className="mt-2 text-xs text-[var(--text-muted)]">
             Didn&apos;t receive the email? Check your spam folder.
@@ -73,10 +100,12 @@ export default function ForgotPasswordPage() {
     <AuthCard>
       <div className="text-center">
         <h1 className="font-(family-name:--font-space-grotesk) text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-          Forgot Password?
+          {mode === "reset" ? "Forgot Password?" : "Resend Verification"}
         </h1>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Enter your email and we&apos;ll send you a reset link
+          {mode === "reset"
+            ? "Enter your email and we'll send you a reset link"
+            : "Enter your email and we'll resend a verification link"}
         </p>
       </div>
 
@@ -98,12 +127,30 @@ export default function ForgotPasswordPage() {
           onChange={(e) => setEmail(e.target.value)}
           required
           autoComplete="email"
+          icon={<Mail className="h-4 w-4 text-[var(--text-muted)]" />}
         />
 
         <Button type="submit" loading={loading} className="mt-2">
-          Send Reset Link <ArrowRight className="h-4 w-4" />
+          {mode === "reset" ? "Send Reset Link" : "Send Verification Link"}{" "}
+          <ArrowRight className="h-4 w-4" />
         </Button>
       </form>
+
+      {/* Toggle mode */}
+      <div className="mt-4 text-center">
+        <button
+          type="button"
+          onClick={() => {
+            setMode(mode === "reset" ? "verify" : "reset");
+            setError(null);
+          }}
+          className="text-xs sm:text-sm text-neon hover:underline"
+        >
+          {mode === "reset"
+            ? "Didn't receive verification email? Resend verification"
+            : "Need to reset password? Forgot password"}
+        </button>
+      </div>
 
       {/* Back */}
       <Link

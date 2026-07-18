@@ -1,10 +1,14 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { getMongoClient } from "@/lib/mongodb";
+
+class EmailNotVerifiedError extends CredentialsSignin {
+  code = "EmailNotVerified";
+}
 
 export const authConfig: NextAuthConfig = {
   adapter: MongoDBAdapter(getMongoClient(), {
@@ -37,7 +41,7 @@ export const authConfig: NextAuthConfig = {
 
         // Block unverified email sign-ins
         if (!user.emailVerified) {
-          throw new Error("EmailNotVerified");
+          throw new EmailNotVerifiedError();
         }
 
         const isValid = await bcrypt.compare(
