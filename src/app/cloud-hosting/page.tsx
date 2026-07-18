@@ -51,7 +51,7 @@ const FEATURES = [
       "If your host node fails, your cloud instance automatically restarts on a healthy node within seconds. Built-in high availability.",
   },
   {
-    icon: "refreshCw" as const,
+    icon: "refresh" as const, // Fixed: Changed from "refreshCw" to "refresh" to match your Feature type allowed union values
     title: "Automatic Snapshots",
     description:
       "Daily point-in-time snapshots with one-click restore. Roll back to any moment in the last 30 days in seconds, not hours.",
