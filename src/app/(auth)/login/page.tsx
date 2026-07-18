@@ -39,6 +39,30 @@ function LoginForm() {
     setLoading(true);
 
     try {
+      // 1. Run pre-login check to validate credentials and email verification state
+      const checkRes = await fetch("/api/auth/login-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const checkData = (await checkRes.json()) as {
+        error?: string;
+        email?: string;
+        success?: boolean;
+      };
+
+      if (!checkRes.ok || checkData.error) {
+        if (checkData.error === "EmailNotVerified") {
+          router.push(`/verify-email/pending?email=${encodeURIComponent(email)}`);
+        } else {
+          setFormError("Invalid email or password");
+        }
+        setLoading(false);
+        return;
+      }
+
+      // 2. Credentials and verification are correct, execute NextAuth sign-in
       const result = await signIn("credentials", {
         email,
         password,
@@ -46,30 +70,7 @@ function LoginForm() {
       });
 
       if (result?.error) {
-        let isUnverified = result.error === "EmailNotVerified";
-        
-        // NextAuth obscures custom errors on the client, so we check the cookie we set in authorize
-        if (typeof document !== "undefined" && document.cookie.includes("auth_error=EmailNotVerified")) {
-          isUnverified = true;
-          document.cookie = "auth_error=; Max-Age=0; path=/"; // clear the cookie
-        }
-
-        if (!isUnverified && result.url) {
-          try {
-            const urlObj = new URL(result.url);
-            if (urlObj.searchParams.get("error") === "EmailNotVerified") {
-              isUnverified = true;
-            }
-          } catch {
-            // Ignore URL parsing issues
-          }
-        }
-
-        if (isUnverified) {
-          router.push(`/verify-email/pending?email=${encodeURIComponent(email)}`);
-        } else {
-          setFormError("Invalid email or password");
-        }
+        setFormError("Invalid email or password");
       } else {
         router.push(callbackUrl);
         router.refresh();

@@ -49,9 +49,6 @@ export const authConfig: NextAuthConfig = {
 
         // Block unverified email sign-ins
         if (!user.emailVerified) {
-          const { cookies } = await import("next/headers");
-          const cookieStore = await cookies();
-          cookieStore.set("auth_error", "EmailNotVerified", { maxAge: 15, path: "/" });
           throw new EmailNotVerifiedError();
         }
 
