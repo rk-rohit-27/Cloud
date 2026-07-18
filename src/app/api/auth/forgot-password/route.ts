@@ -30,24 +30,11 @@ export async function POST(req: Request) {
     // Generate reset token and send email
     const token = await createPasswordResetToken(user._id.toString(), email);
     
-    let appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL;
-    if (!appUrl) {
-      const origin = req.headers.get("origin");
-      if (origin) {
-        appUrl = origin;
-      } else {
-        const proto = req.headers.get("x-forwarded-proto") || "http";
-        const host = req.headers.get("x-forwarded-host") || req.headers.get("host");
-        if (host) {
-          appUrl = `${proto}://${host}`;
-        } else {
-          try {
-            appUrl = new URL(req.url).origin;
-          } catch {
-            appUrl = "http://localhost:3000";
-          }
-        }
-      }
+    let appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || "http://localhost:3000";
+    const host = req.headers.get("x-forwarded-host") || req.headers.get("host");
+    if (host) {
+      const proto = req.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
+      appUrl = `${proto}://${host}`;
     }
     
     const resetUrl = `${appUrl}/reset-password?token=${token}`;
