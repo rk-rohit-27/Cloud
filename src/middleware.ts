@@ -2,21 +2,16 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 
-/**
- * Edge-safe route protection.
- *
- * We deliberately do NOT use `export { auth as middleware }` here because that
- * pulls the full NextAuth config (including the MongoDB adapter) into the edge
- * runtime, which doesn't support `mongodb`'s Node built-ins (`child_process`,
- * `net`, `tls`, `dns`, `fs`).
- *
- * `getToken` only verifies the JWT session cookie — no DB access required,
- * so it runs cleanly in the edge runtime.
- */
 export async function middleware(req: NextRequest) {
+  const useSecureCookies =
+    process.env.NEXT_PUBLIC_APP_URL?.startsWith("https://") ||
+    process.env.NODE_ENV === "production";
+
   const token = await getToken({
     req,
     secret: process.env.AUTH_SECRET,
+    secureCookie: useSecureCookies,
+    salt: useSecureCookies ? "__Secure-authjs.session-token" : "authjs.session-token",
   });
 
   const isAuthed = !!token;
