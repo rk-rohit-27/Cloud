@@ -1,26 +1,268 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ================================================================
+   THEME TOKENS — shared across light & dark
+   ================================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-neon: #00f0ff;
+  --color-neon-purple: #a855f7;
+  --color-neon-blue: #3b82f6;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ================================================================
+   LIGHT MODE (default – sits on :root)
+   ================================================================ */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-surface: #f1f5f9;
+  --bg-nav: rgba(248, 250, 252, 0.8);
+  --border-default: #e2e8f0;
+  --border-hover: rgba(0, 240, 255, 0.25);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-border-hover: rgba(0, 240, 255, 0.25);
+  --btn-ghost-border: #cbd5e1;
+  --btn-ghost-text: #334155;
+  --dot-color: rgba(0, 0, 0, 0.06);
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #94a3b8;
+  --toggle-bg: rgba(0, 0, 0, 0.08);
+  --toggle-active: linear-gradient(135deg, var(--color-neon-blue), var(--color-neon-purple));
+  --footer-border: #e2e8f0;
+  --topbar-bg: rgba(248, 250, 252, 0.85);
+  --topbar-border: #e2e8f0;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+}
+
+/* ================================================================
+   DARK MODE
+   ================================================================ */
+.dark {
+  --bg-primary: #0a0a0a;
+  --bg-card: #111111;
+  --bg-card-hover: #1a1a1a;
+  --bg-surface: #1a1a2e;
+  --bg-nav: rgba(10, 10, 10, 0.75);
+  --border-default: #1e1e2e;
+  --border-hover: rgba(0, 240, 255, 0.2);
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --glass-bg: rgba(17, 17, 17, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(0, 240, 255, 0.2);
+  --btn-ghost-border: rgba(255, 255, 255, 0.15);
+  --btn-ghost-text: #ededed;
+  --dot-color: rgba(255, 255, 255, 0.05);
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb: #333;
+  --scrollbar-thumb-hover: #555;
+  --toggle-bg: rgba(255, 255, 255, 0.08);
+  --toggle-active: linear-gradient(135deg, var(--color-neon-blue), var(--color-neon-purple));
+  --footer-border: rgba(255, 255, 255, 0.05);
+  --topbar-bg: rgba(10, 10, 10, 0.75);
+  --topbar-border: rgba(255, 255, 255, 0.06);
+  --card-bg: #111111;
+  --input-bg: #0a0a0a;
+  --input-border: rgba(255, 255, 255, 0.12);
+}
+
+/* ================================================================
+   BASE STYLES
+   ================================================================ */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ================================================================
+   DOT-GRID BACKGROUND
+   ================================================================ */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ================================================================
+   GRADIENT TEXT
+   ================================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--color-neon) 60%, var(--color-neon-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-neon) 60%, var(--color-neon-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-sm {
+  background: linear-gradient(90deg, var(--color-neon), var(--color-neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================================================
+   GLASSMORPHISM CARD
+   ================================================================ */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.06);
+}
+
+/* ================================================================
+   NEON GLOW BUTTON
+   ================================================================ */
+.btn-neon {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-neon-blue), var(--color-neon-purple));
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.btn-neon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-neon), var(--color-neon-purple));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-neon:hover {
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.35),
+    0 0 60px rgba(0, 240, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-neon:hover::before {
+  opacity: 1;
+}
+
+/* ================================================================
+   GHOST / OUTLINE BUTTON
+   ================================================================ */
+.btn-ghost {
+  position: relative;
+  border: 1px solid var(--btn-ghost-border);
+  color: var(--btn-ghost-text);
+  font-weight: 500;
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-neon);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ================================================================
+   NAVBAR GLASS
+   ================================================================ */
+.nav-glass {
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.3s ease;
+}
+
+/* ================================================================
+   DASHBOARD TOPBAR (Hostinger-style, distinct from public nav)
+   ================================================================ */
+.dashboard-topbar {
+  box-shadow: 0 1px 0 0 var(--topbar-border), 0 6px 20px -12px rgba(0, 0, 0, 0.18);
+}
+
+.dashboard-footer {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ================================================================
+   PRICING TOGGLE
+   ================================================================ */
+.toggle-track {
+  background: var(--toggle-bg);
+  border-radius: 9999px;
+  padding: 4px;
+  position: relative;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 4px;
+  height: calc(100% - 8px);
+  border-radius: 9999px;
+  background: var(--toggle-active);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================================================
+   FEATURE ICON GLOW
+   ================================================================ */
+.icon-glow {
+  color: var(--color-neon);
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
+}
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
