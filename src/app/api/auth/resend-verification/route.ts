@@ -59,10 +59,27 @@ export async function POST(req: Request) {
       userId,
       email,
     );
-    const appUrl =
-      process.env.NEXT_PUBLIC_APP_URL ||
-      process.env.APP_URL ||
-      "http://localhost:3000";
+    
+    let appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL;
+    if (!appUrl) {
+      const origin = req.headers.get("origin");
+      if (origin) {
+        appUrl = origin;
+      } else {
+        const proto = req.headers.get("x-forwarded-proto") || "http";
+        const host = req.headers.get("x-forwarded-host") || req.headers.get("host");
+        if (host) {
+          appUrl = `${proto}://${host}`;
+        } else {
+          try {
+            appUrl = new URL(req.url).origin;
+          } catch {
+            appUrl = "http://localhost:3000";
+          }
+        }
+      }
+    }
+    
     const verifyUrl = `${appUrl}/verify-email?token=${newToken}`;
 
     await sendEmail({

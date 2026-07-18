@@ -11,6 +11,7 @@ class EmailNotVerifiedError extends CredentialsSignin {
 }
 
 export const authConfig: NextAuthConfig = {
+  trustHost: true,
   adapter: MongoDBAdapter(getMongoClient(), {
     databaseName: undefined, // uses default DB from URI
   }),
@@ -39,17 +40,17 @@ export const authConfig: NextAuthConfig = {
 
         if (!user || !user.hashedPassword) return null;
 
-        // Block unverified email sign-ins
-        if (!user.emailVerified) {
-          throw new EmailNotVerifiedError();
-        }
-
         const isValid = await bcrypt.compare(
           credentials.password as string,
           user.hashedPassword as string,
         );
 
         if (!isValid) return null;
+
+        // Block unverified email sign-ins
+        if (!user.emailVerified) {
+          throw new EmailNotVerifiedError();
+        }
 
         return {
           id: user._id.toString(),

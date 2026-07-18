@@ -46,10 +46,21 @@ function LoginForm() {
       });
 
       if (result?.error) {
-        if (result.error === "EmailNotVerified") {
-          setFormError(
-            "Please verify your email address before signing in. Check your inbox or go to Forgot Password to resend the verification link.",
-          );
+        let isUnverified = result.error === "EmailNotVerified";
+        
+        if (!isUnverified && result.url) {
+          try {
+            const urlObj = new URL(result.url);
+            if (urlObj.searchParams.get("error") === "EmailNotVerified") {
+              isUnverified = true;
+            }
+          } catch {
+            // Ignore URL parsing issues
+          }
+        }
+
+        if (isUnverified) {
+          router.push(`/verify-email/pending?email=${encodeURIComponent(email)}`);
         } else {
           setFormError("Invalid email or password");
         }
