@@ -1,5 +1,5 @@
-import { Zap } from "lucide-react";
 import Link from "next/link";
+import Logo from "./Logo";
 
 const FOOTER_LINKS: Record<string, { label: string; href: string }[]> = {
   Hosting: [
@@ -43,12 +43,7 @@ export default function Footer() {
         <div className="grid gap-8 sm:gap-12 grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           {/* Brand Identity Column */}
           <div className="col-span-2 flex flex-col gap-3 sm:gap-4">
-            <Link href="/" className="flex items-center gap-2 group shrink-0 w-fit">
-              <Zap className="h-5 w-5 text-neon transition-transform duration-300 group-hover:scale-110" />
-              <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">
-                NexaSky<span className="gradient-text-sm">Cloud</span>
-              </span>
-            </Link>
+            <Logo href="/" height={40} className="group w-auto h-10 transition-transform duration-300 group-hover:scale-105" />
             <p className="max-w-xs text-xs sm:text-sm leading-relaxed text-[var(--text-muted)]">
               Next-generation Web, Cloud and VPS hosting. Deploy in seconds, build
               without limits.

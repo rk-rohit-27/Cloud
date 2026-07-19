@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useMemo, memo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
+import Logo from "@/components/Logo";
 import {
   Menu,
   Search,
@@ -23,11 +24,11 @@ type Props = {
 export default function DashboardTopbar({ onToggleSidebar }: Props) {
   // 1. Session data fetching
   const { data: session } = useSession();
-  
+
   // 2. State management
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  
+
   // 3. Dom Refs
   const userMenuRef = useRef<HTMLDivElement | null>(null);
   const notifRef = useRef<HTMLDivElement | null>(null);
@@ -43,7 +44,7 @@ export default function DashboardTopbar({ onToggleSidebar }: Props) {
         setNotifOpen(false);
       }
     }
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -51,10 +52,10 @@ export default function DashboardTopbar({ onToggleSidebar }: Props) {
   // 5. Memoized Profile Calculations
   const { firstName, initials } = useMemo(() => {
     const userName = session?.user?.name || "";
-    
+
     const fName = userName ? userName.split(" ")[0] : "there";
     const parts = userName.split(" ").filter(Boolean);
-    const inits = parts.length > 0 
+    const inits = parts.length > 0
       ? parts.map((p) => p[0]).slice(0, 2).join("").toUpperCase()
       : "ZH";
 
@@ -64,7 +65,7 @@ export default function DashboardTopbar({ onToggleSidebar }: Props) {
   return (
     <header className="dashboard-topbar sticky top-0 z-40 w-full border-b border-(--topbar-border) bg-(--topbar-bg) backdrop-blur-md">
       <div className="flex h-14 items-center justify-between gap-2 px-3 sm:gap-3 sm:px-5 lg:px-6">
-        
+
         {/* ── LEFT CLUSTER ── */}
         <div className="flex items-center gap-2 sm:gap-4">
           <button
@@ -79,15 +80,12 @@ export default function DashboardTopbar({ onToggleSidebar }: Props) {
           {/* Company Branding Link */}
           <Link
             href="/"
-            className="hidden items-center gap-2 rounded-lg px-2 py-1 transition-opacity hover:opacity-80 lg:flex"
+            className="hidden items-center rounded-lg px-2 py-1 transition-opacity hover:opacity-80 lg:flex"
           >
-            <div className="grid h-7 w-7 place-items-center rounded-md bg-neon/15 text-neon">
-              <span className="text-sm font-bold">Z</span>
-            </div>
-            <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">NexaSky<span className="gradient-text-sm">Cloud</span></span>
+            <Logo height={40} priority className="h-7 w-auto" />
           </Link>
 
-          
+
         </div>
 
         {/* ── CENTER: SEARCH (Lint Warnings Resolved) ── */}

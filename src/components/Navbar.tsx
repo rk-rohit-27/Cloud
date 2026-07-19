@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 import { useSession } from "next-auth/react";
 
 const NAV_LINKS = [
@@ -22,12 +23,7 @@ export default function Navbar() {
     <header className="nav-glass fixed top-0 left-0 w-full z-50 border-b border-[var(--glass-border)] bg-[var(--bg-main)]/70 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8 sm:py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-neon transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]" />
-          <span className="font-(family-name:--font-space-grotesk) text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)]">
-            NexaSky<span className="gradient-text-sm">Cloud</span>
-          </span>
-        </Link>
+        <Logo href="/" height={40} priority className="group transition-opacity duration-300 hover:opacity-90 h-10  w-auto" />
 
         {/* Desktop Links */}
         <ul className="hidden lg:flex items-center gap-6 xl:gap-8">

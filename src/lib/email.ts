@@ -11,7 +11,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Public base URL used to resolve absolute asset URLs (e.g. the email logo).
+// Matches the appUrl pattern used across the auth API routes.
+const APP_URL =
+  process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || "http://localhost:3000";
+
 export function generateEmailHtml(title: string, content: string, actionUrl?: string, actionText?: string) {
+  // Email body sits on a white card, so the light-theme logo reads best.
+  const logoUrl = `${APP_URL}/NexaSkyCloud-logo-light.png`;
   return `
     <!DOCTYPE html>
     <html>
@@ -26,10 +33,8 @@ export function generateEmailHtml(title: string, content: string, actionUrl?: st
             <td align="center">
               <table width="100%" max-width="600" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                 <tr>
-                  <td style="padding: 40px 40px 20px 40px; text-align: center; background-color: #ffffff; border-bottom: 1px solid #e4e4e7;">
-                    <h1 style="margin: 0; color: #18181b; font-size: 24px; font-weight: 700; letter-spacing: -0.5px;">
-                      NexaSky<span style="color: #0080ff;">Cloud</span>
-                    </h1>
+                  <td style="padding: 32px 40px 20px 40px; text-align: center; background-color: #ffffff; border-bottom: 1px solid #e4e4e7;">
+                    <img src="${logoUrl}" alt="NexaSkyCloud" width="150" height="100" style="display: inline-block; max-width: 150px; height: auto; border: 0; outline: none; text-decoration: none;" />
                   </td>
                 </tr>
                 <tr>

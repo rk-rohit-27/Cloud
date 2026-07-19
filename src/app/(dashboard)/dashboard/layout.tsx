@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import DashboardTopbar from "@/components/dashboard/DashboardTopbar";
 import DashboardFooter from "@/components/dashboard/DashboardFooter";
 import SidebarNav from "@/components/dashboard/SidebarNav";
-import Link from "next/link";
+import Logo from "@/components/Logo";
 
 export default function DashboardLayout({
   children,
@@ -55,13 +55,11 @@ export default function DashboardLayout({
 
       {/* Global Application Grid Shell Core View */}
       <div className="flex flex-1 overflow-hidden relative">
-        
+
         {/* Desktop Sidebar — Fixed persistent left rail */}
         <aside className="hidden lg:block lg:w-64 lg:shrink-0 border-r border-[var(--glass-border)] bg-[var(--bg-primary)] p-6 overflow-y-auto">
           <div className="mb-6 px-2">
-            <span className="font-(family-name:--font-space-grotesk) text-lg font-bold text-[var(--text-primary)]">
-              NexaSky<span className="gradient-text-sm">Cloud</span>
-            </span>
+            <Logo href="/" height={30} className="h-7 w-auto" />
           </div>
           <SidebarNav />
         </aside>
@@ -80,7 +78,7 @@ export default function DashboardLayout({
                 className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
                 onClick={() => setMobileNavOpen(false)}
               />
-              
+
               {/* Drawer Container Panel Wrapper Object */}
               <motion.aside
                 key="drawer"
@@ -91,11 +89,7 @@ export default function DashboardLayout({
                 className="fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-[var(--glass-border)] bg-[var(--bg-primary)] p-5 shadow-2xl lg:hidden"
               >
                 <div className="mb-6 flex items-center justify-between px-2">
-                  <span className="font-(family-name:--font-space-grotesk) text-base font-bold text-[var(--text-primary)]">
-                    <Link href="/">
-                    NexaSky<span className="gradient-text-sm">Cloud</span>
-                  </Link>
-                  </span>
+                  <Logo href="/" height={24} className="h-6 w-auto" />
                   <button
                     type="button"
                     onClick={() => setMobileNavOpen(false)}
@@ -105,7 +99,7 @@ export default function DashboardLayout({
                     <X className="h-5 w-5" />
                   </button>
                 </div>
-                
+
                 <div className="flex-1 overflow-y-auto pr-1">
                   <SidebarNav />
                 </div>
@@ -121,7 +115,7 @@ export default function DashboardLayout({
               {children}
             </div>
           </main>
-          
+
           <DashboardFooter />
         </div>
       </div>

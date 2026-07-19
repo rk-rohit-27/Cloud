@@ -2,8 +2,7 @@
 
 import { type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { Zap } from "lucide-react";
-import Link from "next/link";
+import Logo from "@/components/Logo";
 
 interface AuthCardProps {
   children: ReactNode;
@@ -23,12 +22,9 @@ export default function AuthCard({ children }: AuthCardProps) {
         className="relative z-10 w-full max-w-md sm:max-w-lg"
       >
         {/* Logo */}
-        <Link href="/" className="mb-6 sm:mb-8 flex items-center justify-center gap-2">
-          <Zap className="h-6 w-6 text-neon" />
-          <span className="font-(family-name:--font-space-grotesk) text-xl font-bold text-[var(--text-primary)]">
-            NexaSky<span className="gradient-text-sm">Cloud</span>
-          </span>
-        </Link>
+        <div className="mb-6 sm:mb-8 flex items-center justify-center">
+          <Logo href="/" height={36} priority className="h-9 w-auto" />
+        </div>
 
         {/* Card */}
         <div className="glass-card rounded-xl sm:rounded-2xl p-6 sm:p-8">

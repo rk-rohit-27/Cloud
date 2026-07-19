@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: "NexaSkyCloud — Next-Gen Game & VPS Hosting",
   description:
     "Blazing-fast game servers & VPS hosting with DDoS protection, NVMe SSDs, and instant deployment. Minecraft, FiveM, Rust & more.",
+  icons: {
+    icon: [{ url: "/NexaSkyCloud-logo-light.png", type: "image/png" }],
+    apple: [{ url: "/NexaSkyCloud-logo-light.png" }],
+  },
 };
 
 export default function RootLayout({
